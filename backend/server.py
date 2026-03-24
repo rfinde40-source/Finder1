@@ -398,13 +398,20 @@ async def delete_room(room_id: str, user: dict = Depends(get_current_user)):
 
 @app.get("/api/rooms/owner/my-rooms")
 async def get_my_rooms(user: dict = Depends(get_current_user)):
-    cursor = rooms_collection.find({"owner_id": user["id"]})
+    cursor = rooms_collection.find(
+        {"owner_id": user["id"]},
+        {"_id": 1, "title": 1, "price": 1, "status": 1, "verified": 1, "images": 1,
+         "views": 1, "clicks": 1, "leads": 1, "location": 1, "created_at": 1}
+    )
     rooms = await cursor.to_list(length=100)
     return {"rooms": serialize_docs(rooms)}
 
 @app.get("/api/rooms/owner/analytics")
 async def get_analytics(user: dict = Depends(get_current_user)):
-    cursor = rooms_collection.find({"owner_id": user["id"]})
+    cursor = rooms_collection.find(
+        {"owner_id": user["id"]},
+        {"views": 1, "clicks": 1, "leads": 1}
+    )
     rooms = await cursor.to_list(length=100)
     
     total_views = sum(r.get("views", 0) for r in rooms)
@@ -442,14 +449,18 @@ async def remove_favorite(room_id: str, user: dict = Depends(get_current_user)):
 
 @app.get("/api/favorites")
 async def get_favorites(user: dict = Depends(get_current_user)):
-    cursor = favorites_collection.find({"user_id": user["id"]})
+    cursor = favorites_collection.find({"user_id": user["id"]}, {"room_id": 1})
     favorites = await cursor.to_list(length=100)
     room_ids = [ObjectId(f["room_id"]) for f in favorites]
     
     if not room_ids:
         return {"rooms": []}
     
-    cursor = rooms_collection.find({"_id": {"$in": room_ids}})
+    cursor = rooms_collection.find(
+        {"_id": {"$in": room_ids}},
+        {"_id": 1, "title": 1, "price": 1, "deposit": 1, "location": 1, "room_type": 1,
+         "images": 1, "verified": 1, "gender_preference": 1, "furnishing": 1, "amenities": 1}
+    )
     rooms = await cursor.to_list(length=100)
     return {"rooms": serialize_docs(rooms)}
 
@@ -497,12 +508,16 @@ async def get_chats(user: dict = Depends(get_current_user)):
     cursor = chats_collection.find({"participants": user["id"]}).sort("last_message_at", -1)
     chats = await cursor.to_list(length=100)
     
-    # Get participant details
-    for chat in chats:
-        other_id = next((p for p in chat["participants"] if p != user["id"]), None)
-        if other_id:
-            other_user = await users_collection.find_one({"_id": ObjectId(other_id)})
-            chat["other_user"] = serialize_doc(other_user) if other_user else None
+    # Batch fetch all participant users to avoid N+1 query
+    other_ids = [ObjectId(p) for chat in chats for p in chat["participants"] if p != user["id"]]
+    if other_ids:
+        users_cursor = users_collection.find({"_id": {"$in": other_ids}}, {"_id": 1, "name": 1, "profile_image": 1})
+        users_list = await users_cursor.to_list(length=100)
+        users_map = {str(u["_id"]): serialize_doc(u) for u in users_list}
+        
+        for chat in chats:
+            other_id = next((p for p in chat["participants"] if p != user["id"]), None)
+            chat["other_user"] = users_map.get(other_id)
     
     return {"chats": serialize_docs(chats)}
 
