@@ -529,11 +529,11 @@ export default function PostRoom() {
         </motion.div>
       </div>
 
-      {/* Bottom buttons */}
-      <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border p-4 z-50">
+      {/* Bottom buttons - positioned above bottom nav */}
+      <div className="fixed bottom-20 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border p-4 z-40">
         <div className="max-w-lg mx-auto flex gap-3">
           {currentStep > 0 && (
-            <Button variant="outline" onClick={prevStep} className="flex-1">
+            <Button variant="outline" onClick={prevStep} className="flex-1" data-testid="prev-step">
               <ArrowLeft size={18} className="mr-2" />
               Back
             </Button>
