@@ -1,0 +1,166 @@
+{
+  "brand_identity": {
+    "name": "Finde R",
+    "ethos": "Urban Zen. Efficient, trusted, yet vibrant.",
+    "core_values": ["Trust", "Speed", "Clarity"],
+    "archetype": "Organic & Earthy (Base) + Vibrant Play (Accents)",
+    "target_audience": "Students, Bachelors, Young Professionals"
+  },
+  "typography": {
+    "font_family": {
+      "headings": "Manrope, sans-serif",
+      "body": "Inter, sans-serif",
+      "data": "Space Grotesk, monospace"
+    },
+    "weights": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "bold": 700,
+      "black": 800
+    },
+    "scale": {
+      "h1": "text-4xl md:text-5xl tracking-tight font-bold",
+      "h2": "text-3xl md:text-4xl tracking-tight font-bold",
+      "h3": "text-2xl md:text-3xl font-semibold",
+      "body_lg": "text-lg leading-relaxed",
+      "body_base": "text-base leading-relaxed",
+      "caption": "text-sm text-muted-foreground",
+      "tiny": "text-xs tracking-wider uppercase font-bold"
+    },
+    "installation": "Ensure fonts are imported in index.css via Google Fonts."
+  },
+  "colors": {
+    "light_theme": {
+      "background": "#FAFAFA",
+      "foreground": "#1A1A1A",
+      "card": "#FFFFFF",
+      "card_foreground": "#1A1A1A",
+      "primary": "#0F3D3E",
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#D4F462",
+      "secondary_foreground": "#0F3D3E",
+      "muted": "#F4F4F5",
+      "muted_foreground": "#71717A",
+      "accent": "#FF6B6B",
+      "accent_foreground": "#FFFFFF",
+      "destructive": "#EF4444",
+      "destructive_foreground": "#FFFFFF",
+      "border": "#E4E4E7",
+      "input": "#E4E4E7",
+      "ring": "#0F3D3E"
+    },
+    "dark_theme": {
+      "background": "#09090B",
+      "foreground": "#FAFAFA",
+      "card": "#18181B",
+      "card_foreground": "#FAFAFA",
+      "primary": "#D4F462",
+      "primary_foreground": "#0F3D3E",
+      "secondary": "#27272A",
+      "secondary_foreground": "#FAFAFA",
+      "muted": "#27272A",
+      "muted_foreground": "#A1A1AA",
+      "accent": "#FF6B6B",
+      "accent_foreground": "#FFFFFF",
+      "destructive": "#7F1D1D",
+      "destructive_foreground": "#FAFAFA",
+      "border": "#27272A",
+      "input": "#27272A",
+      "ring": "#D4F462"
+    },
+    "palette_notes": "Use 'primary' (Deep Teal) for main buttons in Light Mode. Use 'secondary' (Electric Lime) for highlights, tags, and 'primary' buttons in Dark Mode to ensure visibility."
+  },
+  "layout": {
+    "spacing": {
+      "container_padding": "p-4 md:p-8",
+      "section_gap": "gap-8 md:gap-12",
+      "card_padding": "p-5"
+    },
+    "border_radius": {
+      "sm": "rounded-sm",
+      "md": "rounded-md",
+      "lg": "rounded-lg",
+      "xl": "rounded-xl",
+      "2xl": "rounded-2xl",
+      "pill": "rounded-full"
+    },
+    "shadows": {
+      "card": "shadow-[0_2px_8px_rgba(0,0,0,0.08)]",
+      "floating": "shadow-[0_8px_30px_rgba(0,0,0,0.12)]",
+      "inner": "shadow-inner"
+    },
+    "grid_strategy": "Mobile-first. Use 'grid-cols-1' for almost everything on mobile. 'grid-cols-2' for product grids on mobile (tight). 'grid-cols-12' for desktop bento layouts."
+  },
+  "components": {
+    "buttons": {
+      "primary": "rounded-full px-8 py-6 font-bold tracking-wide transition-all active:scale-95 hover:shadow-lg",
+      "secondary": "rounded-full px-6 py-4 font-medium bg-muted text-foreground hover:bg-muted/80",
+      "ghost": "rounded-md hover:bg-accent/10 hover:text-accent",
+      "icon": "rounded-full p-3 hover:bg-muted transition-colors"
+    },
+    "cards": {
+      "listing": "rounded-2xl overflow-hidden bg-card border border-border/40 hover:border-primary/20 transition-all hover:shadow-floating group",
+      "feature": "bg-muted/50 rounded-xl p-6 border border-transparent hover:border-border transition-all"
+    },
+    "inputs": {
+      "default": "h-12 rounded-xl border-input bg-background px-4 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+    },
+    "navigation": {
+      "bottom_bar": "fixed bottom-0 left-0 right-0 h-16 bg-white/80 backdrop-blur-lg border-t border-border/40 flex justify-around items-center z-50 pb-safe",
+      "top_bar": "sticky top-0 z-40 w-full backdrop-blur-md bg-background/80 border-b border-border/40"
+    }
+  },
+  "assets": {
+    "icons": {
+      "library": "lucide-react",
+      "style": "stroke-width={1.5} size={24}"
+    },
+    "images": {
+      "hero_onboarding": "https://images.pexels.com/photos/7683897/pexels-photo-7683897.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "living_room": "https://images.pexels.com/photos/5417293/pexels-photo-5417293.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "bedroom": "https://images.unsplash.com/photo-1749703824872-3548e51ebdf2?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHxtaW5pbWFsaXN0JTIwYmVkcm9vbSUyMG1vZGVybiUyMGludGVyaW9yfGVufDB8fHx8MTc3NDMzOTEyNnww&ixlib=rb-4.1.0&q=85",
+      "kitchen": "https://images.pexels.com/photos/36411037/pexels-photo-36411037.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "logo_placeholder": "Use a simple typographic logo 'Finde R' in Manrope Black font."
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure text colors meet WCAG AA standards. Use darker shades of primary colors for text.",
+    "focus_states": "All interactive elements must have a visible ring-2 ring-offset-2 focus state.",
+    "aria_labels": "All icon-only buttons must have aria-label.",
+    "touch_targets": "Minimum 44x44px for all mobile touch targets."
+  },
+  "instructions_to_main_agent": {
+    "1": "Install 'lucide-react' for icons and 'clsx' 'tailwind-merge' for utils.",
+    "2": "Create a 'layout.js' (or .tsx) that handles the PWA shell (bottom nav on mobile, sidebar on desktop).",
+    "3": "Use 'sonner' for all toast notifications. Do not use default alerts.",
+    "4": "For the 'Map View', simulate it with a static image background and absolute positioned 'Price Pills' if a real map library is too complex to set up without API keys. If using a library, use 'react-map-gl' or 'leaflet'.",
+    "5": "Implement the 'Owner Post Wizard' as a multi-step form with progress bar.",
+    "6": "Ensure 'ScrollArea' or 'overflow-y-auto' is used correctly so the bottom nav never overlaps content.",
+    "7": "Do not center everything. Use left alignment for text to improve readability.",
+    "8": "Use the 'Urban Zen' color palette strictly. No generic blue.",
+    "9": "Add 'data-testid' to all buttons and inputs."
+  },
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Do not get biased with the examples in the prompt.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy",
+    "Use glass-morphism effects with backdrop filters (12-24px blur)",
+    "You MUST NOT apply universal transition. Eg: transition: all. This results in breaking transforms. Always add transitions for specific interactive elements like button, input excluding transforms",
+    "You MUST NOT center align the app container, ie do not add .App { text-align: center; } in the css file. This disrupts the human natural reading flow of text",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style",
+    "NEVER: use AI assistant Emoji characters like 🤖🧠💭💡🔮🎯📚🎭🎬🎪🎉🎊🎁🎀🎂🍰🎈🎨🎰💰💵💳🏦💎🪙💸🤑📊📈📉💹🔢🏆🥇 etc for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations. Static = dead.",
+    "Use 2-3x more spacing than feels comfortable. Cramped designs look cheap.",
+    "Subtle grain textures, noise overlays, custom cursors, selection states, and loading animations: separates good from extraordinary.",
+    "Main agent relies on these image URLs. Missing categories (especially sponsor logos) = main agent will use placeholder text which is FORBIDDEN",
+    "Prioritize using pre-existing components from src/components/ui when applicable",
+    "Create new components that match the style and conventions of existing components when needed",
+    "Examine existing components to understand the project's component patterns before creating new ones",
+    "Components MUST use named exports (export const ComponentName = ...)",
+    "Pages MUST use default exports (export default function PageName() {...})",
+    "Use 'sonner' for toasts",
+    "Sonner component are located in /app/src/components/ui/sonner.tsx"
+  ]
+}
