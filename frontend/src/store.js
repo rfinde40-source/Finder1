@@ -89,7 +89,20 @@ export const useAuthStore = create(
         }
       }
     }),
-    { name: 'finder-auth' }
+    { 
+      name: 'finder-auth',
+      partialize: (state) => ({ 
+        user: state.user, 
+        token: state.token, 
+        isAuthenticated: state.isAuthenticated 
+      }),
+      onRehydrateStorage: () => (state) => {
+        // Ensure isAuthenticated is set correctly after rehydration
+        if (state && state.token && state.user) {
+          state.isAuthenticated = true;
+        }
+      }
+    }
   )
 );
 
