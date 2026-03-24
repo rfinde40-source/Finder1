@@ -1,0 +1,70 @@
+{
+  "summary": "Backend API testing completed - 10/10 tests passed",
+  "total_tests": 10,
+  "passed_tests": 10,
+  "failed_tests": 0,
+  "success_rate": 100.0,
+  "test_results": [
+    {
+      "test": "Health Check",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.560202"
+    },
+    {
+      "test": "Seed Data",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.562570"
+    },
+    {
+      "test": "Get Rooms Listing",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.565494"
+    },
+    {
+      "test": "Get Rooms Listing",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.568001"
+    },
+    {
+      "test": "Get Room Details",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.574763"
+    },
+    {
+      "test": "Send OTP",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.587759"
+    },
+    {
+      "test": "Verify OTP",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.630719"
+    },
+    {
+      "test": "Get User Profile",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.634276"
+    },
+    {
+      "test": "Get Favorites",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.636681"
+    },
+    {
+      "test": "Get Bookings",
+      "success": true,
+      "details": "",
+      "timestamp": "2026-03-24T08:19:16.638929"
+    }
+  ],
+  "timestamp": "2026-03-24T08:19:16.639010"
+}
