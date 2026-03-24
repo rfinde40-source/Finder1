@@ -83,9 +83,6 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/post" element={
-            isAuthenticated ? <PostRoom /> : <Navigate to="/login" />
-          } />
           <Route path="/favorites" element={
             isAuthenticated ? <Favorites /> : <Navigate to="/login" />
           } />
@@ -103,7 +100,10 @@ function App() {
           } />
         </Route>
         
-        {/* Full screen routes */}
+        {/* Full screen routes (no bottom nav) */}
+        <Route path="/post" element={
+          isAuthenticated ? <PostRoom /> : <Navigate to="/login" />
+        } />
         <Route path="/room/:id" element={<RoomDetail />} />
         <Route path="/chat/:id" element={
           isAuthenticated ? <ChatRoom /> : <Navigate to="/login" />

@@ -187,13 +187,18 @@ async def send_otp(user: UserCreate):
     if not identifier:
         raise HTTPException(status_code=400, detail="Phone or email required")
     
-    # Rate limiting check
+    # Rate limiting check - reduced to 10 seconds for better UX
     recent_otp = await otp_collection.find_one({
         "$or": [{"phone": user.phone}, {"email": user.email}],
-        "created_at": {"$gte": datetime.now(timezone.utc) - timedelta(seconds=60)}
+        "created_at": {"$gte": datetime.now(timezone.utc) - timedelta(seconds=10)}
     })
     if recent_otp:
         raise HTTPException(status_code=429, detail="Please wait before requesting another OTP")
+    
+    # Delete old OTPs for this user
+    await otp_collection.delete_many({
+        "$or": [{"phone": user.phone}, {"email": user.email}]
+    })
     
     otp = generate_otp()
     await otp_collection.insert_one({
@@ -201,7 +206,7 @@ async def send_otp(user: UserCreate):
         "email": user.email,
         "otp": otp,
         "created_at": datetime.now(timezone.utc),
-        "expires_at": datetime.now(timezone.utc) + timedelta(minutes=5)
+        "expires_at": datetime.now(timezone.utc) + timedelta(minutes=10)
     })
     
     # Mock OTP - in production, send via Twilio/email

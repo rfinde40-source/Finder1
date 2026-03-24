@@ -167,7 +167,7 @@ export default function PostRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-44">
+    <div className="min-h-screen bg-background pb-24">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border/50 px-4 py-4">
         <div className="flex items-center gap-4 mb-4">
@@ -529,24 +529,24 @@ export default function PostRoom() {
         </motion.div>
       </div>
 
-      {/* Bottom buttons - positioned above bottom nav */}
-      <div className="fixed bottom-20 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border p-4 z-40">
+      {/* Bottom buttons */}
+      <div className="fixed bottom-0 left-0 right-0 bg-card/95 backdrop-blur-lg border-t border-border p-4 z-50 pb-safe">
         <div className="max-w-lg mx-auto flex gap-3">
           {currentStep > 0 && (
-            <Button variant="outline" onClick={prevStep} className="flex-1" data-testid="prev-step">
+            <Button variant="outline" onClick={prevStep} className="flex-1 h-12" data-testid="prev-step">
               <ArrowLeft size={18} className="mr-2" />
               Back
             </Button>
           )}
           {currentStep < steps.length - 1 ? (
-            <Button onClick={nextStep} className="flex-1" data-testid="next-step">
+            <Button onClick={nextStep} className="flex-1 h-12" data-testid="next-step">
               Next
               <ArrowRight size={18} className="ml-2" />
             </Button>
           ) : (
             <Button 
               onClick={handleSubmit} 
-              className="flex-1"
+              className="flex-1 h-12"
               disabled={isLoading}
               data-testid="submit-room"
             >
