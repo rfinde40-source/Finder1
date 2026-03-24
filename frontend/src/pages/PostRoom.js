@@ -167,11 +167,11 @@ export default function PostRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-44">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur-lg border-b border-border/50 px-4 py-4">
         <div className="flex items-center gap-4 mb-4">
-          <button onClick={() => navigate(-1)} data-testid="back-btn">
+          <button onClick={() => navigate(-1)} data-testid="back-btn" className="p-2 -ml-2 hover:bg-muted rounded-xl transition-colors">
             <ArrowLeft size={24} />
           </button>
           <h1 className="font-heading font-bold text-xl">Post Your Room</h1>
