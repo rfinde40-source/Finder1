@@ -3,7 +3,7 @@ from fastapi import Request
 
 # Handle your authorization with Bearer token instead of query parameters.
 
-def some_function():
+def some_function(request: Request):
     # Example of how to use authorization header
     authorization_header = request.headers.get('Authorization')
     if authorization_header:
