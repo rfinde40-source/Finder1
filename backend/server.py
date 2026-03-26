@@ -1,3 +1,4 @@
+from fastapi import Request
 # Updated backend/server.py
 
 # Handle your authorization with Bearer token instead of query parameters.
