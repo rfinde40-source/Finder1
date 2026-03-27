@@ -1,20 +1,45 @@
-from fastapi import Request,HTTPException
-# Updated backend/server.py
+import os
+import json
+import firebase_admin
+from firebase_admin import credentials, firestore
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
 
-# Handle your authorization with Bearer token instead of query parameters.
+app = FastAPI()
 
-def some_function(request: Request):
-    # Example of how to use authorization header
-    authorization_header = request.headers.get('Authorization')
-    if authorization_header:
-                parts = authorization_header.split(' ')
-        if len(parts) == 2:
-            token = parts[1]
-            # process with the token...
-        else:
-            raise HTTPException(status_code=401, detail="Invalid Token Format")
-    else:
-        raise HTTPException(status_code=401, detail="Please Login First")
+# --- FIREBASE SETUP ---
+# GitHub Secrets में आपने जो नाम रखा है (जैसे FIREBASEFINDER) वही यहाँ लिखें
+secret_name = "FIREBASEFINDER" 
+firebase_creds_json = os.getenv(secret_name)
 
+if firebase_creds_json:
+    try:
+        creds_dict = json.loads(firebase_creds_json)
+        cred = credentials.Certificate(creds_dict)
+        firebase_admin.initialize_app(cred)
+        db = firestore.client()
+        print("✅ Firebase Connected Successfully!")
+    except Exception as e:
+        print(f"❌ Error: {e}")
+else:
+    print(f"⚠️ Warning: Secret '{secret_name}' not found.")
 
-# Ensure that all instances of token handling in the file are replaced accordingly
+# --- DATA MODEL ---
+class User(BaseModel):
+    name: str
+    email: str
+    phone: str
+
+@app.get("/")
+async def root():
+    return {"message": "Finde R Backend is Live!"}
+
+# --- ENDPOINT TO SAVE DATA ---
+@app.post("/add-user")
+async def add_user(user: User):
+    try:
+        doc_ref = db.collection("users").document()
+        doc_ref.set(user.dict())
+        return {"status": "success", "user_id": doc_ref.id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
