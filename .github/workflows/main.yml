@@ -1,30 +1,37 @@
-name: Django CI
+name: Deploy to Firebase Hosting
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-  build:
-
+  build_and_deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.10"
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r backend/requirements.txt
-    - name: Set Environment Variables
-      run: |
-        echo "FIREBASEFINDER=${{ secrets.FIREBASEFINDER }}" >> $GITHUB_ENV
-    - name: Run Tests
-      run: |
-        # Yahan aap apne tests run karne ki command daal sakte hain
-        echo "Running tests..."
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Create Firebase Service Account File
+        run: |
+          cat <<EOF > firebase-auth.json
+          ${{ secrets.FIREBASEFINDER }}
+          EOF
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASEFINDER }}'
+          channelId: live
+          projectId: finder-32863
