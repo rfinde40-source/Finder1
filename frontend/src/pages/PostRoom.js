@@ -127,18 +127,17 @@ export default function PostRoom() {
   };
 
   const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    // For demo, using placeholder images
-    const newImages = files.map((_, idx) => 
-      `https://images.pexels.com/photos/${5417293 + idx * 1000}/pexels-photo-${5417293 + idx * 1000}.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940`
-    );
-    setFormData(prev => ({
-      ...prev,
-      images: [...prev.images, ...newImages].slice(0, 10)
-    }));
-    setErrors(prev => ({ ...prev, images: null }));
-    toast.success(`${files.length} image(s) added`);
-  };
+  const files = Array.from(e.target.files);
+
+  const newImages = files.map(file => URL.createObjectURL(file));
+
+  setFormData(prev => ({
+    ...prev,
+    images: [...prev.images, ...newImages].slice(0, 10)
+  }));
+
+  setErrors(prev => ({ ...prev, images: null }));
+};
 
   const removeImage = (index) => {
     setFormData(prev => ({
